@@ -1,0 +1,34 @@
+---
+- name: Install KVM driver plugin
+  get_url:
+    url: "{{ kvm_driver_repo_url }}"
+    dest: "{{ minishift_install_path }}/docker-machine-driver-kvm"
+    mode: 0755
+    checksum: "{{ kvm_driver_checksum }}"
+
+- name: Install libvirt and qemu-kvm
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - libvirt-daemon-kvm
+    - qemu-kvm
+  notify: restart libvirtd
+
+- name: Add user to the libvirt group
+  user:
+    name: "{{ lookup('ENV', 'USER') }}"
+    groups: libvirt
+    append: yes
+
+- name: Install minishift
+  unarchive:
+    src: "{{ minishift_archive_url }}"
+    dest: "{{ minishift_install_path }}"
+    exclude:
+      - README.adoc
+      - LICENSE
+    owner: root
+    group: root
+    remote_src: yes
+    mode: 0755

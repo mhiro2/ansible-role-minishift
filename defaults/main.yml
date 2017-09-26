@@ -1,0 +1,10 @@
+---
+minishift_version: '1.6.0'
+minishift_repo_url: "https://github.com/minishift/minishift/releases/download/v{{ minishift_version }}/minishift-{{ minishift_version }}-linux-amd64.tgz"
+minishift_checksum: sha256:b646a9d30eca19b21ca42ff190cd4f4d14d5944ec4ad49145ff989a78bba9ec5
+
+minishift_install_path: /usr/local/bin
+
+kvm_driver_version: '0.7.0'
+kvm_driver_repo_url: "https://github.com/dhiltgen/docker-machine-kvm/releases/download/v{{ kvm_driver_version }}/docker-machine-driver-kvm"
+kvm_driver_checksum: sha256:c4ff3eeb5b232aad41942feb8fb46aaaf8d54239408e2f6549468c997a845a31
